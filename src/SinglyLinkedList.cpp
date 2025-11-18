@@ -3,37 +3,68 @@
 using namespace std;
 
 SinglyLinkedList::SinglyLinkedList() : head(nullptr), tail(nullptr), count(0) {} // Constructor yeni boş bir liste oluşturur
-SinglyLinkedList::~SinglyLinkedList() // Destructor listeyi temizler
+
+
+// Destructor liste silindiğinde çalışır bellek sızıntısı olmasın diye her şeyi sileriz 
+SinglyLinkedList::~SinglyLinkedList() 
 {
     ShapeNode* current = head;
     while (current != nullptr) 
     {
-        ShapeNode* nextNode = current->next;
-        delete current->data; // Shape nesnesini sil
-        delete current; // Node'u sil
-        current = nextNode;
+        ShapeNode* nextNode = current->next; 
+        delete current->data;  //şekli siler
+        delete current;  // düğümü siler
+        current = nextNode; //sıradakine geçer
     }
-
-
-    // BURAYI SONRA SİLEBİLİRİZ
-    //BAK
-    //
-    //
-    cout << "SinglyLinkedList yikicisi calisti, " << count << " sekil silindi." << endl;
 }
 
-void SinglyLinkedList::append(Shape* newShape) // Listeye yeni bir şekil ekler
+
+
+// listeye yeni bir şekli en sona ekler
+void SinglyLinkedList::append(Shape* newShape) 
 {
     ShapeNode* newNode = new ShapeNode(newShape);
     if (head == nullptr) 
     {
         head = newNode;
-        tail = newNode;
+        tail = newNode; 
     } 
+
+    
+    //listede düğüm varsa sonuncunun arkasına bağlayalım
     else 
     {
-        tail->next = newNode;
+        tail->next = newNode; //direkt listenin sonuna ekleme yaptık (hızlı )
         tail = newNode;
     }
     count++;
+}
+
+//çizim methodum
+void SinglyLinkedList::draw(char** screenBuffer) 
+{
+    ShapeNode* current = head;
+    while (current != nullptr) 
+    {
+        current->data->draw(screenBuffer); 
+        current = current->next; 
+    }
+}
+
+//kaydetme methodum
+void SinglyLinkedList::save(ofstream& file) 
+{
+    ShapeNode* current = head;
+    while (current != nullptr) 
+    {
+        current->data->save(file); 
+        current = current->next; 
+    }
+}
+
+
+//eleman sayısını döndürür
+int SinglyLinkedList::getCount() const 
+{
+    return this->count;
 }

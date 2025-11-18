@@ -1,98 +1,79 @@
 #include <iostream>
-
-#include "Rectangle.hpp" 
-#include "Star.hpp"
+#include <conio.h> // Klavye okumak için gerekli (_getch)
+#include "Screen.hpp"
+#include "DoublyLinkedList.hpp"
+#include "Rectangle.hpp"
 #include "Triangle.hpp"
+#include "Star.hpp"
 
+using namespace std;
 
-//buraya sonra bakalım 
-// Daha sonra bu sabitleri merkezi bir 'Screen.hpp' dosyasına taşıyacağız.
-const int SCREEN_HEIGHT = 25;
 const int SCREEN_WIDTH = 80;
+const int SCREEN_HEIGHT = 25;
 
-
-
-char** createScreenBuffer() {
-    // Önce 'satır' işaretçileri için yer ayırıyoruz
-    char** buffer = new char*[SCREEN_HEIGHT];
-
-    // Sonra her satır için 'sütun' karakterleri için yer ayırıyoruz
-    for (int i = 0; i < SCREEN_HEIGHT; ++i) {
-        buffer[i] = new char[SCREEN_WIDTH];
-        
-        // Bu satırdaki tüm sütunları 'boşluk' karakteri ile dolduruyoruz
-        for (int j = 0; j < SCREEN_WIDTH; ++j) {
-            buffer[i][j] = ' '; // Temiz bir ekran için boşluk ata
-        }
-    }
-    return buffer;
-}
-
-
-
-void printScreenBuffer(char** buffer) {
-    // Üst çerçeve
-    for (int j = 0; j < SCREEN_WIDTH + 2; ++j) std::cout << "-";
-    std::cout << "\n";
-
-    for (int i = 0; i < SCREEN_HEIGHT; ++i) {
-        std::cout << "|"; // Sol çerçeve
-        for (int j = 0; j < SCREEN_WIDTH; ++j) {
-            std::cout << buffer[i][j];
-        }
-        std::cout << "|\n"; // Sağ çerçeve
-    }
-
-    // Alt çerçeve
-    for (int j = 0; j < SCREEN_WIDTH + 2; ++j) std::cout << "-";
-    std::cout << "\n";
-}
-
-
-
-
-void deleteScreenBuffer(char** buffer) {
-    // Önce her 'satır' için ayrılan 'sütun' belleğini serbest bırak
-    for (int i = 0; i < SCREEN_HEIGHT; ++i) {
-        delete[] buffer[i];
-    }
-    // Son olarak 'satır' işaretçilerinin tutulduğu diziyi serbest bırak
-    delete[] buffer;
-}
-
-
-// --- ANA TEST PROGRAMI (ÜÇ ŞEKİL İLE) ---
 int main() {
-    std::cout << "3 Sekil Test Programi Baslatiliyor...\n";
+    // 1. Kurulum
+    Screen ekran(SCREEN_WIDTH, SCREEN_HEIGHT);
+    DoublyLinkedList* tren = new DoublyLinkedList();
 
-    // 1. Ekran tamponunu oluştur
-    char** ekran = createScreenBuffer();
-
-    // 2. Polimorfizm kullanarak 3 şekli de oluştur
-    //    Shape(x, y, z, w, h, karakter)
+    // --- TEST VERİLERİ OLUŞTURMA ---
+    // 1. Vagon (Kareler)
+    tren->appendNode();
+    tren->getCurrentList()->append(new Rectangle(20, 5, 0, 10, 5, '#'));
     
-    // (Z değeri şimdilik önemli değil, Z-sorting eklemedik)
-    Shape* sekil1 = new Rectangle(5, 3, 1, 20, 8, '@');
-    Shape* sekil2 = new Triangle(40, 5, 1, 12, 12, '*');
-    Shape* sekil3 = new Star(60, 2, 1, 9, 9, '+'); // 9x9 "Artı" şekli
+    // 2. Vagon (Üçgenler - Aşağı inince görülecek)
+    tren->appendNode();
+    tren->moveDown(); // 2'ye geçip ekleyelim
+    tren->getCurrentList()->append(new Triangle(40, 5, 0, 11, 11, 'o'));
 
-    // 3. Tüm şekilleri AYNI ekran tamponuna çizdir
-    std::cout << "Sekiller ciziliyor...\n";
-    sekil1->draw(ekran);
-    sekil2->draw(ekran);
-    sekil3->draw(ekran);
+    // 3. Vagon (Yıldızlar)
+    tren->appendNode();
+    tren->moveDown(); // 3'e geçip ekleyelim
+    tren->getCurrentList()->append(new Star(60, 5, 0, 7, 7, '*'));
 
-    // 4. Ekran tamponunun son halini konsola yazdır
-    std::cout << "Cizim sonrasi ekran tamponu:\n";
-    printScreenBuffer(ekran);
+    // Başlangıçta en başa dönelim
+    tren->moveUp(); 
+    tren->moveUp(); 
 
-    // 5. Belleği temizle (ÇOK ÖNEMLİ)
-    delete sekil1; 
-    delete sekil2;
-    delete sekil3;
-    deleteScreenBuffer(ekran); 
+    // --- ANA PROGRAM DÖNGÜSÜ (GAME LOOP) ---
+    while (true) {
+        // A. EKRANI TEMİZLEME
+        // Ekran sınıfının içindeki tamponu temizle
+        ekran.clear(); 
+        // Windows konsol ekranını temizle (titreşimi önlemek için en basit yol)
+        system("cls"); 
 
-    std::cout << "Test programi tamamlandi.\n";
-    
+        // B. ÇİZİM İŞLEMLERİ
+        // 1. Arayüzü (sol tarafı) çiz
+        ekran.drawUI(tren);
+        
+        // 2. Eğer bir vagon seçiliyse, içindeki şekilleri çiz
+        SinglyLinkedList* seciliVagon = tren->getCurrentList();
+        if (seciliVagon != nullptr) {
+            seciliVagon->draw(ekran.getBuffer());
+        }
+
+        // C. GÖSTERİM
+        ekran.print();
+
+        // D. KULLANICI GİRİŞİ (INPUT)
+        // Kullanıcı bir tuşa basana kadar program burada bekler.
+        int tus = _getch();
+
+        // E. TUŞ KONTROLÜ
+        if (tus == 'w') {
+            tren->moveUp();
+        }
+        else if (tus == 's') {
+            tren->moveDown();
+        }
+        else if (tus == 'c') { // 'c' tuşu ile çıkış
+            break; 
+        }
+        // Buraya ileride 'f' (işlem menüsü) eklenecek
+    }
+
+    // Temizlik
+    delete tren;
     return 0;
 }
