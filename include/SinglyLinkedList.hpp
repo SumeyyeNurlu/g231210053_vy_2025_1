@@ -14,22 +14,37 @@ class SinglyLinkedList
         {
             Shape* data; 
             ShapeNode* next; 
-            ShapeNode(Shape* shapeData): data(shapeData), next(nullptr) {} // Constructor
+            ShapeNode(Shape* shapeData): data(shapeData), next(nullptr) {} 
         };
         
-        ShapeNode* head; // Listenin başı
-        ShapeNode* tail; // Listenin sonu
-        int count; // Eleman sayısı
+        ShapeNode* head; //  başı
+        ShapeNode* tail; // sonu
+        int count; // eleman sayısı
+
+
+        ShapeNode* cursor; // imleç hangi şeklin seçili olduğunu tutar
 
     public:
-        SinglyLinkedList(); // Constructor
-        ~SinglyLinkedList(); // Destructor
+        SinglyLinkedList(); 
+        ~SinglyLinkedList(); 
 
-        void append(Shape* shape); // Listeye eleman ekler
-        void draw (char** screenBuffer); // Ekrana çizer
-        void save(ofstream& outFile); // Şekilleri dosyaya kaydeder
-        int getCount() const; // Eleman sayısını döndürür
+        void append(Shape* shape); //  eleman ekler
+        void draw (char** screenBuffer); //  çizer
+        void save(ofstream& outFile); //  dosyaya kaydeder
+        int getCount() const; // sayısını döndürür
 
+
+
+    // imleci başa alır
+    void resetCursor(); 
+    
+    // sonraki şekle taşır
+    void moveNext(); 
+    
+    // imlecin gösterdiği şekli döndürür
+    Shape* getCurrentShape() const;
+    
+    void deleteCurrent();
     
 };
 

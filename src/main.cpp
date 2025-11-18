@@ -1,5 +1,13 @@
 #include <iostream>
-#include <conio.h> // Klavye okumak için gerekli (_getch)
+#include <conio.h> 
+#include <cstdlib> 
+#include <ctime>   
+
+// --- DÜZELTME BURADA ---
+#define NOGDI // Windows'un Rectangle fonksiyonunu iptal et!
+#include <windows.h> 
+// -----------------------
+
 #include "Screen.hpp"
 #include "DoublyLinkedList.hpp"
 #include "Rectangle.hpp"
@@ -8,72 +16,117 @@
 
 using namespace std;
 
+// ... (Kodun geri kalanı tamamen aynı)
+
 const int SCREEN_WIDTH = 80;
 const int SCREEN_HEIGHT = 25;
 
+// --- EKRAN TİTREMESİNİ ÖNLEYEN FONKSİYON ---
+// İmleci konsolun sol üst köşesine (0, 0) taşır.
+// Böylece ekranı silmeden (cls yapmadan) üzerine yazabiliriz.
+void gotoxy(int x, int y) {
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+// --- İMLECİ GİZLEME FONKSİYONU (İsteğe bağlı estetik) ---
+// Konsoldaki yanıp sönen o küçük beyaz tireyi gizler.
+void hideCursor() {
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO info;
+    info.dwSize = 100;
+    info.bVisible = FALSE;
+    SetConsoleCursorInfo(consoleHandle, &info);
+}
+
+void rastgeleVeriOlustur(DoublyLinkedList* tren) {
+    int vagonSayisi = 20; 
+
+    for (int i = 0; i < vagonSayisi; ++i) {
+        tren->appendNode();
+    }
+
+    while (tren->getCursorIndex() > 1) {
+        tren->moveUp();
+    }
+
+    for (int i = 0; i < vagonSayisi; ++i) {
+        SinglyLinkedList* liste = tren->getCurrentList();
+        int sekilSayisi = (rand() % 6) + 2; 
+
+        for (int j = 0; j < sekilSayisi; ++j) {
+            int x = rand() % 70; 
+            int y = rand() % 20; 
+            int w = (rand() % 10) + 3; 
+            int h = (rand() % 10) + 3; 
+            int z = rand() % 10; 
+            
+            char karakterler[] = {'#', '*', '+', '@', 'o', 'X', '$', '%', '&'};
+            char c = karakterler[rand() % 9];
+            int tip = rand() % 3;
+
+            if (tip == 0) liste->append(new Rectangle(x, y, z, w, h, c));
+            else if (tip == 1) liste->append(new Triangle(x, y, z, w, h, c));
+            else liste->append(new Star(x, y, z, w, h, c));
+        }
+
+        if (i < vagonSayisi - 1) tren->moveDown();
+    }
+
+    while (tren->getCursorIndex() > 1) tren->moveUp();
+}
+
 int main() {
-    // 1. Kurulum
+    srand(time(0));
+    hideCursor(); // Yanıp sönen imleci gizle
+
     Screen ekran(SCREEN_WIDTH, SCREEN_HEIGHT);
     DoublyLinkedList* tren = new DoublyLinkedList();
 
-    // --- TEST VERİLERİ OLUŞTURMA ---
-    // 1. Vagon (Kareler)
-    tren->appendNode();
-    tren->getCurrentList()->append(new Rectangle(20, 5, 0, 10, 5, '#'));
-    
-    // 2. Vagon (Üçgenler - Aşağı inince görülecek)
-    tren->appendNode();
-    tren->moveDown(); // 2'ye geçip ekleyelim
-    tren->getCurrentList()->append(new Triangle(40, 5, 0, 11, 11, 'o'));
+    cout << "Veriler nasil olusturulsun?\n";
+    cout << "(r) Rastgele\n";
+    cout << "(d) Dosyadan (Henuz aktif degil)\n";
+    cout << "Secim: ";
+    char secim;
+    cin >> secim;
 
-    // 3. Vagon (Yıldızlar)
-    tren->appendNode();
-    tren->moveDown(); // 3'e geçip ekleyelim
-    tren->getCurrentList()->append(new Star(60, 5, 0, 7, 7, '*'));
+    // Seçim sonrası ekranı bir kere tamamen temizle
+    system("cls"); 
 
-    // Başlangıçta en başa dönelim
-    tren->moveUp(); 
-    tren->moveUp(); 
+    if (secim == 'r' || secim == 'R') {
+        rastgeleVeriOlustur(tren);
+    } else {
+        tren->appendNode(); 
+    }
 
-    // --- ANA PROGRAM DÖNGÜSÜ (GAME LOOP) ---
+    // --- OYUN DÖNGÜSÜ ---
     while (true) {
-        // A. EKRANI TEMİZLEME
-        // Ekran sınıfının içindeki tamponu temizle
-        ekran.clear(); 
-        // Windows konsol ekranını temizle (titreşimi önlemek için en basit yol)
-        system("cls"); 
+        // 1. İmleci en başa al (Silme YOK!)
+        gotoxy(0, 0);
 
-        // B. ÇİZİM İŞLEMLERİ
-        // 1. Arayüzü (sol tarafı) çiz
+        // 2. İç tamponu temizle (Bellekteki sayfa)
+        ekran.clear();
+        
+        // 3. Yeni durumu çiz
         ekran.drawUI(tren);
         
-        // 2. Eğer bir vagon seçiliyse, içindeki şekilleri çiz
         SinglyLinkedList* seciliVagon = tren->getCurrentList();
         if (seciliVagon != nullptr) {
             seciliVagon->draw(ekran.getBuffer());
         }
 
-        // C. GÖSTERİM
+        // 4. Tamponu ekrana bas (Eskinin üzerine yazar)
         ekran.print();
 
-        // D. KULLANICI GİRİŞİ (INPUT)
-        // Kullanıcı bir tuşa basana kadar program burada bekler.
         int tus = _getch();
 
-        // E. TUŞ KONTROLÜ
-        if (tus == 'w') {
-            tren->moveUp();
-        }
-        else if (tus == 's') {
-            tren->moveDown();
-        }
-        else if (tus == 'c') { // 'c' tuşu ile çıkış
-            break; 
-        }
-        // Buraya ileride 'f' (işlem menüsü) eklenecek
+        if (tus == 'w') tren->moveUp();
+        else if (tus == 's') tren->moveDown();
+        else if (tus == 'c') break;
     }
 
-    // Temizlik
     delete tren;
     return 0;
 }

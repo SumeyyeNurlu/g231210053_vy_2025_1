@@ -76,47 +76,63 @@ char** Screen::getBuffer() {
 }
 
 
-
-
-
-// ARAYÜZ ÇİZİMİ (Soldaki Kutular ve Ok)
+// ARAYÜZ ÇİZİMİ (SAYFALAMA / PAGINATION VERSİYONU)
 void Screen::drawUI(DoublyLinkedList* mainList) {
     if (!mainList) return;
 
-    // Listenin başına eriş (friend olduğu için erişebilir)
+    int boxHeight = 3; 
+    int gap = 1;       
+    int itemTotalH = boxHeight + gap; 
+    
+    int startY = 1;   
+
+    // 1. Ekrana kaç tane kutu sığar? (Örn: 6 tane)
+    int maxVisibleItems = (height - startY) / itemTotalH;
+
+    // 2. Şu anki imleç kaçıncı sırada? (0'dan başlayarak)
+    int cursorIndex = mainList->getCursorIndex() - 1; 
+    if (cursorIndex < 0) cursorIndex = 0;
+
+    // --- DEĞİŞEN KISIM (SAYFALAMA MANTIĞI) ---
+    
+    // Hangi "sayfada" olduğumuzu bulalım (Tamsayı bölmesi)
+    // Örnek: cursor=5, max=6 -> sayfa=0
+    // Örnek: cursor=6, max=6 -> sayfa=1
+    int pageNumber = cursorIndex / maxVisibleItems;
+
+    // Çizime başlayacağımız düğüm, sayfanın ilk düğümüdür
+    int startNodeIndex = pageNumber * maxVisibleItems;
+
+    // --- DEĞİŞEN KISIM SONU ---
+
+    // 4. Listeyi 'startNodeIndex' kadar ilerlet (Atla)
     auto current = mainList->head;
-    int index = 0;
-    int boxHeight = 3; // Kutunun yüksekliği
-    int startY = 1;    // Çizime yukarıdan biraz boşlukla başla
+    int skipCounter = 0;
+    while (current != nullptr && skipCounter < startNodeIndex) {
+        current = current->next;
+        skipCounter++;
+    }
 
-    while (current != nullptr) {
-        // Kutunun Y koordinatını hesapla (her kutu arası 4 birim boşluk olsun)
-        int topY = startY + (index * 4);
+    // 5. Şimdi ekrana sığdığı kadarını çiz
+    int screenIndex = 0; 
+
+    while (current != nullptr && screenIndex < maxVisibleItems) {
+        int topY = startY + (screenIndex * itemTotalH);
         
-        // Ekran dışına taşarsa çizme
-        if (topY + boxHeight >= height) break;
-
-        // --- KUTUYU ÇİZ ---
-        // 1. Üst kenar (*********)
+        // --- KUTU ÇİZİMİ (AYNI) ---
         for (int j = 0; j < 9; ++j) buffer[topY][j] = '*';
         
-        // 2. Orta kısım (* 5   *)
-        buffer[topY + 1][0] = '*'; // Sol duvar
-        buffer[topY + 1][8] = '*'; // Sağ duvar
+        buffer[topY + 1][0] = '*'; 
+        buffer[topY + 1][8] = '*'; 
         
-        // İçindeki sayıyı yaz (Listede kaç şekil var?)
         int count = current->shapeList->getCount();
-        // Basitçe ASCII'ye çevir (Sadece tek haneli sayılar için örnek)
-        // Çok haneli sayılar için string dönüşümü gerekebilir ama şimdilik basit tutalım.
         buffer[topY + 1][4] = (count < 10) ? (count + '0') : 'X'; 
 
-        // 3. Alt kenar (*********)
         for (int j = 0; j < 9; ++j) buffer[topY + 2][j] = '*';
 
-        // --- İMLEÇ (OK) ÇİZİMİ ---
-        // Eğer bu düğüm cursor ise yanına ok koy (<--)
+        // --- İMLEÇ ÇİZİMİ (AYNI) ---
         if (current == mainList->cursor) {
-            if (12 < width) { // Ekranda yer varsa
+            if (12 < width) { 
                 buffer[topY + 1][10] = '<';
                 buffer[topY + 1][11] = '-';
                 buffer[topY + 1][12] = '-';
@@ -124,6 +140,6 @@ void Screen::drawUI(DoublyLinkedList* mainList) {
         }
 
         current = current->next;
-        index++;
+        screenIndex++; 
     }
 }

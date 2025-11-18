@@ -5,7 +5,7 @@ using namespace std;
 SinglyLinkedList::SinglyLinkedList() : head(nullptr), tail(nullptr), count(0) {} // Constructor yeni boş bir liste oluşturur
 
 
-// Destructor liste silindiğinde çalışır bellek sızıntısı olmasın diye her şeyi sileriz 
+// destructor liste silindiğinde çalışır bellek sızıntısı olmasın diye her şeyi sileriz 
 SinglyLinkedList::~SinglyLinkedList() 
 {
     ShapeNode* current = head;
