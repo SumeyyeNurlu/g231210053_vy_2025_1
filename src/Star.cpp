@@ -26,46 +26,48 @@ using namespace std;
     }
 
 
+    //yıldız çizme *
+void Star::draw(char** screenBuffer) 
+{
+  
+    int ortaNokta = this->height / 2;
 
-    
-  void Star::draw(char** screenBuffer) 
-  {
-    
-    // --- Çizim Mantığı ---
+    for (int i = 0; i < this->height; ++i) 
+    {
+        int gecerliSatir = this->y + i;
+        if (gecerliSatir < 0 || gecerliSatir >= SCREEN_HEIGHT) continue;
 
-    // 1. Yatay çizgiyi çiz
-    // Tamsayı bölmesi sayesinde hem tek (örn: 5/2 = 2)
-    // hem de çift (örn: 6/2 = 3) yükseklikler için çalışır.
-    int ortaSatir = this->y + (this->height / 2); 
+        int yildizSayisi = 0;
+        if (i <= ortaNokta)
+        {
+            yildizSayisi = (int)( ((float)(i + 1) / (ortaNokta + 1)) * this->width );
+        }
+        else 
+        {
+            int alttanSira = this->height - 1 - i;
+            yildizSayisi = (int)( ((float)(alttanSira + 1) / (ortaNokta + 1)) * this->width );
+        }
+        
+        if (yildizSayisi % 2 == 0)
+        {
+            yildizSayisi--;
+        }
 
-    // Dikey sınır kontrolü (Satır ekran dışında mı?)
-    if (ortaSatir >= 0 && ortaSatir < SCREEN_HEIGHT) {
-        // Genişlik (width) boyunca tüm sütunları çiz
-        for (int j = 0; j < this->width; ++j) {
-            int gecerliSutun = this->x + j;
-            // Yatay sınır kontrolü (Sütun ekran dışında mı?)
-            if (gecerliSutun < 16) continue;
-            // ------------------
+        if (yildizSayisi < 1) yildizSayisi = 1;
+        
+        if (yildizSayisi > this->width) yildizSayisi = this->width;
 
-            if (gecerliSutun >= 0 && gecerliSutun < SCREEN_WIDTH) {
-                screenBuffer[ortaSatir][gecerliSutun] = this->cizimKarakteri;
+        int solBosluk = (this->width - yildizSayisi) / 2;
+        int baslangicSutun = this->x + solBosluk;
+
+        for (int j = 0; j < yildizSayisi; ++j) 
+        {
+            int gecerliSutun = baslangicSutun + j;
+
+            if (gecerliSutun < 16) continue; 
+            if (gecerliSutun >= SCREEN_WIDTH) continue; 
+
+            screenBuffer[gecerliSatir][gecerliSutun] = this->cizimKarakteri;
         }
     }
-
-    // 2. Dikey çizgiyi çiz
-    // Tamsayı bölmesi sayesinde hem tek (örn: 5/2 = 2)
-    // hem de çift (örn: 6/2 = 3) genişlikler için çalışır.
-    int ortaSutun = this->x + (this->width / 2); 
-if (ortaSutun >= 16 && ortaSutun < SCREEN_WIDTH) 
-{ 
-    // --------------------------------------------------------------
-        for (int i = 0; i < this->height; ++i) 
-        {
-            int gecerliSatir = this->y + i;
-            if (gecerliSatir >= 0 && gecerliSatir < SCREEN_HEIGHT) 
-            {
-                screenBuffer[gecerliSatir][ortaSutun] = this->cizimKarakteri;
-         }}}
-
-
-}}   
+}

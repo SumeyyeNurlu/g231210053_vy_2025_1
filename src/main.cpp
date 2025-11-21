@@ -1,10 +1,8 @@
 #include <iostream>
 #include <conio.h> 
 #include <cstdlib> 
-#include <ctime>   
-
-            
-#include <windows.h>      
+#include <ctime>            
+#include <windows.h>   
 
 #include "Screen.hpp"     
 #include "DoublyLinkedList.hpp"
@@ -14,13 +12,17 @@
 
 using namespace std;
 
-void gotoxy(int x, int y) {
+
+//ekran kırpışmasını önlemek için yaptım
+void gotoxy(int x, int y) 
+{
     COORD coord;
     coord.X = x;
     coord.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+//yanıp sönen imleci gizlemek istedim
 void hideCursor() {
     HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO info;
@@ -29,6 +31,7 @@ void hideCursor() {
     SetConsoleCursorInfo(consoleHandle, &info);
 }
 
+//rastgele veri oluşturarak şekillerin çizilmesi
 void rastgeleVeriOlustur(DoublyLinkedList* tren) {
     int vagonSayisi = 20; 
     for (int i = 0; i < vagonSayisi; ++i) tren->appendNode();
@@ -46,8 +49,8 @@ void rastgeleVeriOlustur(DoublyLinkedList* tren) {
             int h = (rand() % 8) + 3; 
             int z = rand() % 10; 
             
-            char chars[] = {'#', '*', '+', '@', 'o', 'X', '$', '%', '&'};
-            char c = chars[rand() % 9];
+            char chars[] = {'#', '*', '+', 'o', 'X', '$', '%', '&'};
+            char c = chars[rand() % 8];
             int tip = rand() % 3;
 
             if (tip == 0) liste->append(new Rect(x, y, z, w, h, c));
@@ -59,12 +62,14 @@ void rastgeleVeriOlustur(DoublyLinkedList* tren) {
     while (tren->getCursorIndex() > 1) tren->moveUp();
 }
 
+
 int main() {
     system("mode con: cols=100 lines=40"); // Pencere boyutu
     srand(time(0));
     hideCursor();
 
-    Screen ekran(80, 25); 
+    Screen ekran(80, 25); //ekran 80*25 boyutunda
+
     DoublyLinkedList* tren = new DoublyLinkedList();
 
     cout << "--- SEKIL YONETIM SISTEMI ---\n";
@@ -76,9 +81,9 @@ int main() {
     
     system("cls"); 
 
-
-
     
+    //seçim kısmı 
+
     if (secim == 'r' || secim == 'R') 
     {
         rastgeleVeriOlustur(tren);
@@ -93,13 +98,10 @@ int main() {
         }
         system("pause"); 
     }
-
     else 
     {
         tren->appendNode(); 
     }
-
-
 
 
     bool listeModu = false; 
@@ -207,13 +209,10 @@ int main() {
 
     system("cls"); 
 
-    
     cout << "Cikis yapiliyor ve veriler kaydediliyor...\n";
-    
     
     tren->saveToFile("Data.txt");
 
-    
     delete tren;
     
     //kapanmadan 1.5 saniye bekle (Mesaj okunsun diye)
