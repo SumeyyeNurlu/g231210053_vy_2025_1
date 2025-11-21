@@ -1,0 +1,23 @@
+=== SEKIL YONETIM SISTEMI VERI DOSYASI ===
+Format: [Tip] | [Koordinatlar] | [Boyutlar] | [Sembol]
+
+--- LISTE #1 BASLANGIC ---
+Triangle	| X: 39 	| Y: 17 	| Z: 5 	| Gen: 5 	| Yuk: 5 	| Sembol: X
+Triangle	| X: 46 	| Y: 12 	| Z: 7 	| Gen: 9 	| Yuk: 7 	| Sembol: +
+--- LISTE #1 BITIS ---
+
+--- LISTE #2 BASLANGIC ---
+Triangle	| X: 18 	| Y: 12 	| Z: 5 	| Gen: 3 	| Yuk: 5 	| Sembol: %
+Rect	| X: 32 	| Y: 19 	| Z: 7 	| Gen: 5 	| Yuk: 9 	| Sembol: #
+Rect	| X: 36 	| Y: 8 	| Z: 0 	| Gen: 9 	| Yuk: 6 	| Sembol: #
+--- LISTE #2 BITIS ---
+
+--- LISTE #3 BASLANGIC ---
+Triangle	| X: 36 	| Y: 12 	| Z: 8 	| Gen: 10 	| Yuk: 9 	| Sembol: X
+Triangle	| X: 53 	| Y: 19 	| Z: 5 	| Gen: 6 	| Yuk: 7 	| Sembol: $
+Triangle	| X: 37 	| Y: 12 	| Z: 1 	| Gen: 7 	| Yuk: 4 	| Sembol: *
+Rect	| X: 27 	| Y: 7 	| Z: 2 	| Gen: 10 	| Yuk: 8 	| Sembol: o
+Triangle	| X: 19 	| Y: 7 	| Z: 5 	| Gen: 10 	| Yuk: 5 	| Sembol: #
+Rect	| X: 28 	| Y: 11 	| Z: 8 	| Gen: 7 	| Yuk: 6 	| Sembol: $
+--- LISTE #3 BITIS ---
+
