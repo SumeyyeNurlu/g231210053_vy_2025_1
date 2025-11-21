@@ -2,47 +2,114 @@
 Format: [Tip] | [Koordinatlar] | [Boyutlar] | [Sembol]
 
 --- LISTE #1 BASLANGIC ---
-Triangle	| X: 66 	| Y: 8 	| Z: 3 	| Gen: 4 	| Yuk: 3 	| Sembol: X
-Triangle	| X: 65 	| Y: 2 	| Z: 0 	| Gen: 5 	| Yuk: 7 	| Sembol: @
+Rectangle	| X: 22 	| Y: 13 	| Z: 2 	| Gen: 8 	| Yuk: 8 	| Sembol: @
+Star		| X: 43 	| Y: 8 	| Z: 4 	| Gen: 9 	| Yuk: 5 	| Sembol: *
+Star		| X: 56 	| Y: 15 	| Z: 3 	| Gen: 9 	| Yuk: 3 	| Sembol: &
+Triangle	| X: 49 	| Y: 9 	| Z: 4 	| Gen: 10 	| Yuk: 7 	| Sembol: &
+Star		| X: 45 	| Y: 15 	| Z: 9 	| Gen: 7 	| Yuk: 4 	| Sembol: o
+Star		| X: 41 	| Y: 17 	| Z: 4 	| Gen: 5 	| Yuk: 7 	| Sembol: X
+Triangle	| X: 41 	| Y: 4 	| Z: 7 	| Gen: 6 	| Yuk: 8 	| Sembol: *
 --- LISTE #1 BITIS ---
 
 --- LISTE #2 BASLANGIC ---
-Star		| X: 38 	| Y: 1 	| Z: 3 	| Gen: 6 	| Yuk: 4 	| Sembol: #
-Star		| X: 32 	| Y: 12 	| Z: 6 	| Gen: 4 	| Yuk: 3 	| Sembol: +
-Rectangle	| X: 49 	| Y: 15 	| Z: 8 	| Gen: 6 	| Yuk: 3 	| Sembol: &
+Triangle	| X: 54 	| Y: 9 	| Z: 3 	| Gen: 3 	| Yuk: 4 	| Sembol: $
+Star		| X: 55 	| Y: 4 	| Z: 8 	| Gen: 4 	| Yuk: 8 	| Sembol: %
+Rectangle	| X: 46 	| Y: 18 	| Z: 8 	| Gen: 10 	| Yuk: 3 	| Sembol: %
+Star		| X: 56 	| Y: 6 	| Z: 4 	| Gen: 6 	| Yuk: 9 	| Sembol: *
+Star		| X: 47 	| Y: 13 	| Z: 5 	| Gen: 7 	| Yuk: 10 	| Sembol: #
 --- LISTE #2 BITIS ---
 
 --- LISTE #3 BASLANGIC ---
-Star		| X: 31 	| Y: 11 	| Z: 6 	| Gen: 4 	| Yuk: 5 	| Sembol: @
-Star		| X: 24 	| Y: 12 	| Z: 4 	| Gen: 7 	| Yuk: 9 	| Sembol: &
-Triangle	| X: 60 	| Y: 17 	| Z: 8 	| Gen: 10 	| Yuk: 7 	| Sembol: #
-Triangle	| X: 18 	| Y: 9 	| Z: 2 	| Gen: 9 	| Yuk: 9 	| Sembol: X
-Triangle	| X: 23 	| Y: 15 	| Z: 5 	| Gen: 5 	| Yuk: 8 	| Sembol: X
+Star		| X: 52 	| Y: 4 	| Z: 2 	| Gen: 5 	| Yuk: 3 	| Sembol: %
+Rectangle	| X: 24 	| Y: 16 	| Z: 1 	| Gen: 8 	| Yuk: 4 	| Sembol: +
 --- LISTE #3 BITIS ---
 
 --- LISTE #4 BASLANGIC ---
-Triangle	| X: 62 	| Y: 4 	| Z: 2 	| Gen: 8 	| Yuk: 5 	| Sembol: *
-Triangle	| X: 86 	| Y: 14 	| Z: 7 	| Gen: 7 	| Yuk: 5 	| Sembol: $
-Star		| X: 78 	| Y: 5 	| Z: 4 	| Gen: 8 	| Yuk: 9 	| Sembol: +
-Triangle	| X: 57 	| Y: 0 	| Z: 9 	| Gen: 6 	| Yuk: 5 	| Sembol: X
+Star		| X: 27 	| Y: 2 	| Z: 4 	| Gen: 6 	| Yuk: 9 	| Sembol: +
+Star		| X: 51 	| Y: 16 	| Z: 4 	| Gen: 3 	| Yuk: 9 	| Sembol: X
+Rectangle	| X: 18 	| Y: 1 	| Z: 3 	| Gen: 7 	| Yuk: 5 	| Sembol: o
+Star		| X: 58 	| Y: 6 	| Z: 2 	| Gen: 9 	| Yuk: 10 	| Sembol: %
+Rectangle	| X: 52 	| Y: 6 	| Z: 0 	| Gen: 10 	| Yuk: 8 	| Sembol: @
 --- LISTE #4 BITIS ---
 
 --- LISTE #5 BASLANGIC ---
-Star		| X: 38 	| Y: 17 	| Z: 4 	| Gen: 8 	| Yuk: 3 	| Sembol: &
-Triangle	| X: 40 	| Y: 1 	| Z: 1 	| Gen: 10 	| Yuk: 4 	| Sembol: o
-Rectangle	| X: 25 	| Y: 1 	| Z: 9 	| Gen: 6 	| Yuk: 6 	| Sembol: *
-Triangle	| X: 21 	| Y: 2 	| Z: 3 	| Gen: 8 	| Yuk: 5 	| Sembol: &
+Triangle	| X: 36 	| Y: 6 	| Z: 5 	| Gen: 5 	| Yuk: 6 	| Sembol: *
+Star		| X: 38 	| Y: 1 	| Z: 8 	| Gen: 4 	| Yuk: 4 	| Sembol: X
+Rectangle	| X: 24 	| Y: 4 	| Z: 9 	| Gen: 4 	| Yuk: 8 	| Sembol: X
+Triangle	| X: 34 	| Y: 10 	| Z: 3 	| Gen: 3 	| Yuk: 4 	| Sembol: +
 --- LISTE #5 BITIS ---
 
 --- LISTE #6 BASLANGIC ---
-Triangle	| X: 57 	| Y: 5 	| Z: 8 	| Gen: 4 	| Yuk: 10 	| Sembol: o
-Rectangle	| X: 24 	| Y: 8 	| Z: 9 	| Gen: 5 	| Yuk: 8 	| Sembol: o
-Triangle	| X: 44 	| Y: 14 	| Z: 0 	| Gen: 7 	| Yuk: 8 	| Sembol: %
+Triangle	| X: 19 	| Y: 16 	| Z: 5 	| Gen: 3 	| Yuk: 8 	| Sembol: @
+Rectangle	| X: 35 	| Y: 9 	| Z: 9 	| Gen: 4 	| Yuk: 6 	| Sembol: *
+Triangle	| X: 38 	| Y: 10 	| Z: 3 	| Gen: 5 	| Yuk: 10 	| Sembol: @
+Triangle	| X: 25 	| Y: 11 	| Z: 6 	| Gen: 5 	| Yuk: 7 	| Sembol: %
 --- LISTE #6 BITIS ---
 
 --- LISTE #7 BASLANGIC ---
-Rectangle	| X: 30 	| Y: 7 	| Z: 6 	| Gen: 8 	| Yuk: 10 	| Sembol: X
-Star		| X: 36 	| Y: 1 	| Z: 3 	| Gen: 8 	| Yuk: 7 	| Sembol: *
-Rectangle	| X: 53 	| Y: 18 	| Z: 4 	| Gen: 7 	| Yuk: 6 	| Sembol: %
+Star		| X: 45 	| Y: 0 	| Z: 4 	| Gen: 9 	| Yuk: 6 	| Sembol: #
+Star		| X: 38 	| Y: 1 	| Z: 9 	| Gen: 7 	| Yuk: 9 	| Sembol: X
+Triangle	| X: 18 	| Y: 14 	| Z: 7 	| Gen: 10 	| Yuk: 9 	| Sembol: &
+Triangle	| X: 43 	| Y: 0 	| Z: 5 	| Gen: 4 	| Yuk: 8 	| Sembol: $
+Triangle	| X: 28 	| Y: 14 	| Z: 6 	| Gen: 3 	| Yuk: 7 	| Sembol: @
+Rectangle	| X: 27 	| Y: 10 	| Z: 2 	| Gen: 3 	| Yuk: 8 	| Sembol: o
 --- LISTE #7 BITIS ---
+
+--- LISTE #8 BASLANGIC ---
+Rectangle	| X: 62 	| Y: 12 	| Z: 5 	| Gen: 10 	| Yuk: 3 	| Sembol: o
+Triangle	| X: 59 	| Y: 11 	| Z: 5 	| Gen: 3 	| Yuk: 4 	| Sembol: *
+Star		| X: 46 	| Y: 19 	| Z: 8 	| Gen: 8 	| Yuk: 6 	| Sembol: &
+--- LISTE #8 BITIS ---
+
+--- LISTE #9 BASLANGIC ---
+Triangle	| X: 52 	| Y: 13 	| Z: 3 	| Gen: 4 	| Yuk: 6 	| Sembol: #
+Triangle	| X: 45 	| Y: 17 	| Z: 8 	| Gen: 4 	| Yuk: 7 	| Sembol: &
+--- LISTE #9 BITIS ---
+
+--- LISTE #10 BASLANGIC ---
+Triangle	| X: 63 	| Y: 10 	| Z: 4 	| Gen: 9 	| Yuk: 7 	| Sembol: @
+Star		| X: 50 	| Y: 13 	| Z: 0 	| Gen: 6 	| Yuk: 6 	| Sembol: #
+Rectangle	| X: 46 	| Y: 15 	| Z: 1 	| Gen: 10 	| Yuk: 10 	| Sembol: &
+Star		| X: 55 	| Y: 2 	| Z: 3 	| Gen: 5 	| Yuk: 5 	| Sembol: &
+--- LISTE #10 BITIS ---
+
+--- LISTE #11 BASLANGIC ---
+Rectangle	| X: 35 	| Y: 4 	| Z: 6 	| Gen: 9 	| Yuk: 10 	| Sembol: %
+Star		| X: 25 	| Y: 1 	| Z: 1 	| Gen: 10 	| Yuk: 5 	| Sembol: &
+Triangle	| X: 41 	| Y: 17 	| Z: 9 	| Gen: 10 	| Yuk: 7 	| Sembol: %
+Rectangle	| X: 66 	| Y: 9 	| Z: 1 	| Gen: 4 	| Yuk: 8 	| Sembol: *
+Rectangle	| X: 36 	| Y: 6 	| Z: 4 	| Gen: 9 	| Yuk: 8 	| Sembol: @
+Rectangle	| X: 58 	| Y: 10 	| Z: 4 	| Gen: 3 	| Yuk: 8 	| Sembol: %
+Rectangle	| X: 29 	| Y: 5 	| Z: 7 	| Gen: 7 	| Yuk: 5 	| Sembol: %
+--- LISTE #11 BITIS ---
+
+--- LISTE #12 BASLANGIC ---
+Star		| X: 63 	| Y: 10 	| Z: 2 	| Gen: 5 	| Yuk: 3 	| Sembol: X
+Star		| X: 59 	| Y: 15 	| Z: 6 	| Gen: 10 	| Yuk: 10 	| Sembol: @
+Star		| X: 58 	| Y: 17 	| Z: 3 	| Gen: 9 	| Yuk: 3 	| Sembol: #
+Star		| X: 55 	| Y: 12 	| Z: 8 	| Gen: 7 	| Yuk: 5 	| Sembol: $
+Triangle	| X: 19 	| Y: 18 	| Z: 9 	| Gen: 7 	| Yuk: 3 	| Sembol: %
+Star		| X: 60 	| Y: 18 	| Z: 8 	| Gen: 10 	| Yuk: 10 	| Sembol: @
+--- LISTE #12 BITIS ---
+
+--- LISTE #13 BASLANGIC ---
+Rectangle	| X: 22 	| Y: 17 	| Z: 9 	| Gen: 4 	| Yuk: 9 	| Sembol: %
+Star		| X: 42 	| Y: 19 	| Z: 6 	| Gen: 7 	| Yuk: 3 	| Sembol: X
+--- LISTE #13 BITIS ---
+
+--- LISTE #14 BASLANGIC ---
+Star		| X: 25 	| Y: 14 	| Z: 4 	| Gen: 7 	| Yuk: 10 	| Sembol: &
+Triangle	| X: 49 	| Y: 0 	| Z: 9 	| Gen: 10 	| Yuk: 6 	| Sembol: @
+Triangle	| X: 33 	| Y: 4 	| Z: 1 	| Gen: 3 	| Yuk: 9 	| Sembol: X
+--- LISTE #14 BITIS ---
+
+--- LISTE #15 BASLANGIC ---
+Rectangle	| X: 62 	| Y: 14 	| Z: 6 	| Gen: 7 	| Yuk: 6 	| Sembol: +
+Triangle	| X: 49 	| Y: 11 	| Z: 2 	| Gen: 3 	| Yuk: 9 	| Sembol: +
+Star		| X: 52 	| Y: 3 	| Z: 2 	| Gen: 8 	| Yuk: 6 	| Sembol: #
+Star		| X: 17 	| Y: 1 	| Z: 7 	| Gen: 8 	| Yuk: 9 	| Sembol: X
+Triangle	| X: 30 	| Y: 9 	| Z: 7 	| Gen: 10 	| Yuk: 7 	| Sembol: +
+Rectangle	| X: 26 	| Y: 19 	| Z: 8 	| Gen: 10 	| Yuk: 3 	| Sembol: %
+Rectangle	| X: 48 	| Y: 14 	| Z: 5 	| Gen: 10 	| Yuk: 8 	| Sembol: #
+--- LISTE #15 BITIS ---
 
