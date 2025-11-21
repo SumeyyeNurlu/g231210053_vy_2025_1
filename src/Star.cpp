@@ -1,43 +1,33 @@
 #include "Star.hpp"
 #include <fstream>
+#include "Screen.hpp"
 using namespace std;
 
-
-//BURAYA MUTLAKA BAK SONRA
-// NOT: Bu sabitler geçicidir ve daha sonra merkezi bir Screen
-// sınıfı veya yapılandırma dosyası tarafından yönetilmelidir.
-const int SCREEN_WIDTH = 80; //Ekran genişliği
-const int SCREEN_HEIGHT = 25; //Ekran yüksekliği
-
-    Star::Star (int x, int y, int z, int width, int height, char karakter)
-    : Shape (x, y, z, width, height, karakter) //ana sınıfın constructorını çağırdım
-        {
-            //kurucu gövdesi genelde boş olmalı çünkü iş başlatma listesinde yapılır
-        }
+    Star::Star (int x, int y, int z, int width, int height, char karakter) : Shape (x, y, z, width, height, karakter) {} 
+    Star::~Star(){}
 
         
-    Star::~Star()
+    //tür adını döndüren method
+    string Star::getType()const  
         {
-            //sınıfta new ile özel bir bellek alanı ayrılmadığı için yıkıcının gövdesi boş kalsın
+            return "Star";
         }
 
 
-    string Star::getType()const  // getType fonksiyonunu implementasyon
-        {
-            return "Star"; //şeklin türünü "Star" döndürüyor
-        }
-
-
-    void Star::save (ofstream& outFile)  // save fonksiyonunu implementasyon
-        {
-            //şeklin tüm özelliklerini dosyaya kaydediyor
-            outFile << getType() << " " << x << " " << y << " " << z << " " << width << " " << height << " " << cizimKarakteri << endl;
-        }
+    void Star::save(std::ofstream& file) 
+    {
+    file << getType() 
+         << "\t\t| X: " << this->x   // Star kelimesi kısa olduğu için 2 tane \t koydum hizalansın diye
+         << " \t| Y: " << this->y 
+         << " \t| Z: " << this->z 
+         << " \t| Gen: " << this->width 
+         << " \t| Yuk: " << this->height 
+         << " \t| Sembol: " << this->cizimKarakteri << "\n";
+    }
 
 
 
     
-            //BURAYI KONTROL EDECEĞİZ YİNE MUTLAKAAAAAA
   void Star::draw(char** screenBuffer) 
   {
     
@@ -54,9 +44,11 @@ const int SCREEN_HEIGHT = 25; //Ekran yüksekliği
         for (int j = 0; j < this->width; ++j) {
             int gecerliSutun = this->x + j;
             // Yatay sınır kontrolü (Sütun ekran dışında mı?)
+            if (gecerliSutun < 16) continue;
+            // ------------------
+
             if (gecerliSutun >= 0 && gecerliSutun < SCREEN_WIDTH) {
                 screenBuffer[ortaSatir][gecerliSutun] = this->cizimKarakteri;
-            }
         }
     }
 
@@ -64,16 +56,16 @@ const int SCREEN_HEIGHT = 25; //Ekran yüksekliği
     // Tamsayı bölmesi sayesinde hem tek (örn: 5/2 = 2)
     // hem de çift (örn: 6/2 = 3) genişlikler için çalışır.
     int ortaSutun = this->x + (this->width / 2); 
-
-    // Yatay sınır kontrolü (Sütun ekran dışında mı?)
-    if (ortaSutun >= 0 && ortaSutun < SCREEN_WIDTH) {
-        // Yükseklik (height) boyunca tüm satırları çiz
-        for (int i = 0; i < this->height; ++i) {
+if (ortaSutun >= 16 && ortaSutun < SCREEN_WIDTH) 
+{ 
+    // --------------------------------------------------------------
+        for (int i = 0; i < this->height; ++i) 
+        {
             int gecerliSatir = this->y + i;
-            // Dikey sınır kontrolü (Satır ekran dışında mı?)
-            if (gecerliSatir >= 0 && gecerliSatir < SCREEN_HEIGHT) {
+            if (gecerliSatir >= 0 && gecerliSatir < SCREEN_HEIGHT) 
+            {
                 screenBuffer[gecerliSatir][ortaSutun] = this->cizimKarakteri;
-            }
-        }
-    }
-}
+         }}}
+
+
+}}   

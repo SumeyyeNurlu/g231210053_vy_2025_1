@@ -16,8 +16,6 @@ class Shape
     int width, height; //şeklin boyutları
     char cizimKarakteri; //şekli neyle çizdiğimiz * # @ gibi
 
-
-
     public:
 
     Shape(int x, int y, int z, int width, int height, char cizimKarakteri);  //bu benim shape sınıfımın constructorı
@@ -28,16 +26,11 @@ class Shape
 
     virtual void save(ofstream& outFile)=0; //şeklin verilerin0i dosyaya kaydeder
 
-    virtual string getType()const=0; //şeklin türünü metin olarak döndürür (örn: "Rectangle")
+    virtual string getType()const=0; 
 
-    void move (int dx, int dy); //şekli dx kadar x ekseninde, dy kadar y ekseninde taşır
-    int getZ()const; //şeklin z değerini döndürür
+    void move (int dx, int dy); 
 
+    int getZ()const; 
 };
-
-
-
-
-
 
 #endif

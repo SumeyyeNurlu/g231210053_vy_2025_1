@@ -4,6 +4,9 @@
 
 using namespace std;
 
+const int SCREEN_WIDTH = 80;
+const int SCREEN_HEIGHT = 25;
+
 class Screen
 {
     private:
@@ -35,11 +38,7 @@ class Screen
     //çizim arayüzü
     void drawUI(DoublyLinkedList* mainList);
 
-
-
+    
 };
-
-
-
 
 #endif

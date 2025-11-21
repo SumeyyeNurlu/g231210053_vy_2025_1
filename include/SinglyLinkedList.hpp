@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 class SinglyLinkedList 
 {
 
@@ -14,15 +13,14 @@ class SinglyLinkedList
         {
             Shape* data; 
             ShapeNode* next; 
-            ShapeNode(Shape* shapeData): data(shapeData), next(nullptr) {} 
+            ShapeNode(Shape* shapeData);
         };
         
         ShapeNode* head; //  başı
         ShapeNode* tail; // sonu
         int count; // eleman sayısı
 
-
-        ShapeNode* cursor; // imleç hangi şeklin seçili olduğunu tutar
+        ShapeNode* cursor; // imleç 
 
     public:
         SinglyLinkedList(); 
@@ -40,6 +38,8 @@ class SinglyLinkedList
     
     // sonraki şekle taşır
     void moveNext(); 
+
+    void movePrevious(); 
     
     // imlecin gösterdiği şekli döndürür
     Shape* getCurrentShape() const;

@@ -3,32 +3,19 @@
 #include "SinglyLinkedList.hpp"
 
 class DoublyLinkedList
-{
-
-    //Bu izin sayesinde Screen sınıfı, listenin içinde gezinebilecek.
-    friend class Screen;
-
+{    
+    friend class Screen; //screen sınıfı listenin içinde gezinebilsin 
     private:
-
     struct Node
     {
-        SinglyLinkedList*shapeList;
+        SinglyLinkedList* shapeList;
         Node* next;
         Node* prev;
 
-        Node()
-        {
-            shapeList = new SinglyLinkedList();
-            next = nullptr;
-            prev = nullptr;
-        }
-
-        //ana düğümü sildiğimde  singly linked listi de silmesi için
-        ~Node()
-        {
-            delete shapeList;
-        }
+        Node();  
+        ~Node(); 
     };
+
 
     Node* head;
     Node* tail;
@@ -49,11 +36,21 @@ public:
     //imleci aşağı taşır
     void moveDown();
 
+    //imlecin gösterdiği düğümü siler
+    void deleteCurrentNode();
+
    //imlecin olduğu listeyi gösterir
     SinglyLinkedList* getCurrentList() const;
     
     //imlecin indexi
     int getCursorIndex() const;
+
+
+    //dosyaya kaydetme
+    void saveToFile(string filename);
+    
+    //kaydettiğimiz verileri yükleme
+    void loadFromFile(string filename);
 
 };
 
